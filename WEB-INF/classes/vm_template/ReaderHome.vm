@@ -10,7 +10,7 @@
    #if (!$session.getAttribute("username"))
    	   <h4>$status</h4>
 	   <form method="post" action="Login">
-		<p>User name: <input type="text" name="name"> Password: <input type="password" name="pwd">&nbsp;<input type="submit"  class="btn btn-primary" value="Login"></p>
+		<p>Email: <input type="text" name="email"> Password: <input type="password" name="pwd">&nbsp;<input type="submit"  class="btn btn-primary" value="Login"></p>
 	   </form>	   
    #else
    	   <h4>Logged in as $session.getAttribute("username")</h4>

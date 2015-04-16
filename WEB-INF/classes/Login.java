@@ -23,7 +23,7 @@ public class Login extends VelocityViewServlet {
 		response.setContentType("text/html");
 		java.sql.Connection conn = null;
 		java.sql.PreparedStatement ps=null;
-		String username = request.getParameter("name");
+		String email = request.getParameter("email");
 		String password = request.getParameter("pwd");
 		String checkname = "";
 		String checkemail = "";
@@ -39,7 +39,7 @@ public class Login extends VelocityViewServlet {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				conn=DriverManager.getConnection(url,sqluserName,sqlpassword);
 				// prepare statement
-				ps = conn.prepareStatement("SELECT * FROM User WHERE Name='" + username + "' AND Password='"+password+"';");
+				ps = conn.prepareStatement("SELECT * FROM User WHERE Email='" + email + "' AND Password='"+password+"';");
 			}
 		catch(Exception e)
 			{
@@ -65,7 +65,7 @@ public class Login extends VelocityViewServlet {
 			}
 			
 		
-		if (checkname.equals(username) && checkname != "")
+		if (checkemail.equals(email) && checkemail != "")
 		//Successful login
 			{
 				ctx.put("status","Logged in as: " + checkname);
@@ -74,15 +74,15 @@ public class Login extends VelocityViewServlet {
 				session.setAttribute("roleID", checkrole);
 				session.setAttribute("email", checkemail);
 			} 
-		else if (username == null && password == null)
+		else if (email == null && password == null)
 		//No login attempt
 			{
-				ctx.put("status","Username and Password not found");
+				ctx.put("status","Email and Password not entered");
 			}	
 		else 
-		//Any other reason for failure
+		//Email not found
 			{
-				ctx.put("status","Unsuccessful login");
+				ctx.put("status","Account not found");
 			}	
 		try 
 		{
