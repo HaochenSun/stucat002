@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/stucat002/css/css/bootstrap.min.css">
+<style>
+div.nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+div.nav li {
+    float: left;
+}
+
+div.nav a {
+    display: block;
+    width: 150px;
+    background-color: #dddddd;
+}
+</style>
+</head>
+
+<body>
+<h1 style="text-align:center">Welcome to Self-Resourcing Electronic Journal</h1>
+
+<form>
+Username<input type="text" name="username">  Password<input type="password" name="password">
+<input type="submit" value="Login">
+</form>
+
+<div class="nav">
+  <ul>
+    <li><a href="#notification">Notification</a></li>
+    <li><a href="#editor">Contact editor</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+</div>  
+
+<form action="">
+  <input type="search" name="search">
+  <input type="submit">
+</form>
+
+<ul>
+  <li><a id="2015" href="#">2015</a></li>
+  
+  <div class="nav" id="edition" style="display: none;">
+    <ul>
+      <li><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">4</a></li>  
+    </ul>
+  </div>  
+  <li><a id="2014" href="#">2014</a></li>
+  <li><a id="2013" href="#">2013</a></li>
+  <li><a id="2012" href="#">2012</a></li>
+  
+  #foreach ($row in $volumeData)
+		#set ($c = 0)
+		#foreach ($col in $row) 
+			#if ($c == 0)
+				#set ($volumeId = $col)
+			#else
+				#set ($volumeName = $col)
+			#end
+			#set ($c = 1)
+		#end
+		<li><a id=$!volumeId href="#">$!volumeName</a></li>
+  #end
+ 
+</ul>
+
+    <script type="text/javascript">
+        window.onload = function() {
+          var a = document.getElementById("2015");
+    
+          a.onclick = function() {
+        	if(document.getElementById("edition").style.display=="none")  
+        	  document.getElementById("edition").style.display="initial";
+        	else
+              document.getElementById("edition").style.display="none";	
+            return false;
+          }
+        }       
+        
+        
+       
+    </script>
+
+</body>
+
+</html>

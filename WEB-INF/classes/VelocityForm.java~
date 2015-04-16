@@ -1,0 +1,119 @@
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.velocity.app.Velocity;
+import org.apache.velocity.context.Context;
+import org.apache.velocity.Template;
+import org.apache.velocity.tools.view.VelocityViewServlet;
+import java.io.*;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import com.mysql.jdbc.*;
+
+public class VelocityForm extends VelocityViewServlet {
+	
+	public Template handleRequest (HttpServletRequest request, HttpServletResponse response, Context ctx) {
+		Template page = null;
+		response.setContentType("text/html");
+		java.sql.Connection conn = null;
+		java.sql.PreparedStatement ps=null;
+		String username = request.getParameter("name");
+		String password = request.getParameter("pwd");
+		String checkname = "";
+		Integer checkrole = 0;
+		try 
+			{ 
+				// connect to the database
+				String sqluserName="team152";
+				String sqlpassword="b042ba74";
+				String url="jdbc:mysql://stusql.dcs.shef.ac.uk/team152";
+				
+				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				conn=DriverManager.getConnection(url,sqluserName,sqlpassword);
+				// prepare statement
+				ps = conn.prepareStatement("SELECT * FROM User WHERE Name='" + username + "' AND Password='"+password+"';");
+			}
+		catch(Exception e)
+			{
+				System.out.println(e);	
+			}			
+		try 
+			{
+				ResultSet results = ps.executeQuery();
+				while (results.next()) 
+				{     
+					 checkname = results.getString("Name");
+					 checkrole = results.getInt("RoleId");
+				}
+			} 
+		catch (SQLException e) 
+			{
+				e.printStackTrace();
+			}
+		finally
+			{
+				try{conn.close();}catch(SQLException e){e.printStackTrace();}
+			}
+			
+		
+		if (checkname.equals(username) && checkname != "")
+			{
+				ctx.put("status","Successful login as " + checkname);
+				switch (checkrole) {
+				    case 1:  ctx.put("link","/Reader");
+					     ctx.put("linktext","Reader Page");
+					     break;
+				    case 2:  ctx.put("link","/Author");
+					     ctx.put("linktext","Author Page");
+					     break;
+				    case 3:  ctx.put("link","/Reviewer");
+					     ctx.put("linktext","Reviewer Page");
+					     break;
+				    case 4:  ctx.put("link","/Editor");
+					     ctx.put("linktext","Editor Page");
+					     break;
+				    default: ctx.put("link","/stucat002/index.html");
+					     ctx.put("linktext","No role found");
+					     break;
+				}
+				try 
+				{
+					page = getTemplate("\\vm_template\\home.vm");
+				} 
+				catch (Exception e) 
+				{
+					System.out.println("VelocityForm excpetion: " + e);
+				}
+			} 
+		else if (username == null && password == null)
+			{
+				ctx.put("status","Please Log In");
+				try 
+				{
+					page = getTemplate("\\vm_template\\form.vm");
+				} 
+				catch (Exception e) 
+				{
+					System.out.println("VelocityForm excpetion: " + e);
+				}
+			}	
+		else 
+			{
+				ctx.put("status","Unsuccessful login");
+				try 
+				{
+					page = getTemplate("\\vm_template\\form.vm");
+				} 
+				catch (Exception e) 
+				{
+					System.out.println("VelocityForm excpetion: " + e);
+				}
+			}	
+		return page;
+	}
+}
