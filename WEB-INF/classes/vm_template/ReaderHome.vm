@@ -5,7 +5,7 @@
 </head>
 
 <body>
-<h1 style="text-align:center">Welcome to Self-Resourcing Electronic Journal</h1>
+<h1 style="text-align:center">Welcome to Self-Resousrcing Electronic Journal</h1>
 	
    #if (!$session.getAttribute("username"))
    	   <h4>$status</h4>
