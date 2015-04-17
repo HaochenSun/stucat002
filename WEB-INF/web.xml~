@@ -64,8 +64,17 @@
     <servlet>
         <servlet-name>Logout</servlet-name>
         <servlet-class>Logout</servlet-class>
+<<<<<<< HEAD
     </servlet>  
+
+=======
+    </servlet>
+    <servlet>
+        <servlet-name>ReaderAbout</servlet-name>
+        <servlet-class>ReaderAbout</servlet-class>
+    </servlet>
     
+>>>>>>> Haochen1
     
     
     <servlet-mapping>
@@ -80,7 +89,16 @@
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
+<<<<<<< HEAD
+
+=======
+    <servlet-mapping>
+        <servlet-name>ReaderAbout</servlet-name>
+        <url-pattern>/ReaderAbout</url-pattern>
+    </servlet-mapping>
+ 
     
+>>>>>>> Haochen1
 
 
     
