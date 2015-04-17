@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/stucat002/css/css/bootstrap.min.css">
+</head>
+<body>
+   <h3>Submit Form</h3>
+   <h4>$status</h4>
+      
+   	<form method="post" action="Submit" onsubmit="return validateForm(this.articles, this.letter)">
+	
+   	
+	
+	#if($session.getAttribute("UserId"))
+		<p>User id <input type="text" name="user_id" value=$session.getAttribute("UserId")>
+		<p>Your Name <input type="text" name="username" value=$session.getAttribute("username")>
+		<p>Your Email <input type="text" name="email" value=$session.getAttribute("email")>
+		
+	#else
+		<p>User id <input type="text" id="userID" name="user_id" value="">
+		<p>Your Name <input type="text" name="username" value="">
+		<p>Your Email <input type="text" name="email" value="">
+	#end
+		
+	#if(!$title)
+	<p>Title <input type="text" name="title" >
+	#else
+	<p>Title <input type="text" name="title"  value=$title>	
+	#end
+	
+	<p>Abstract *
+	<p><textarea rows="4" cols="50" name="articalAbstract" id="articalAbstract">$!abstract</textarea>
+	<p>Keywords: 
+	
+	<!--INPUT LIST, DATA LIST AND LOOP-->
+	<p><input list="keys" id="key">
+	 	
+	<datalist id="keys">
+		#set($start = 0)
+		#set($end = $keywordsarrayL)
+		#set($range = [ $start..$end ])
+		#foreach($i in $range)
+		   <option value=$keywordsarray.get($i)>
+		#end
+	  </datalist>
+	  <button type="button" id="btnAdd" onclick="addKeyword()">Add Keyword</button>
+	  
+	  <p>
+	  <select multiple="multiple" size="10" id="keyselect">	  
+	  </select>
+	  <button type="button" id="btnRemove" onclick="removeKeyword()">Remove Keyword</button>
+
+	
+	
+	<div><input type="submit" value="Submit"></div>
+	
+    </form>
+    
+    <script type="text/javascript">
+    	    function validateForm(articles, letter) {
+    	    	if(articles.selectedIndex == 0) {
+    	    		alert('Please make a selection from the articles list');
+    	    		return false;
+    	    	} 	
+    	    		
+    	    	if(letter.value == '') {
+    	    		alert('Please fill the letter message');
+    	    		return false;
+    	    	} 	
+    	    }
+    	    
+    	    function addKeyword() {
+    	    	var x = document.getElementById("keyselect");
+    	    	var y = document.getElementById("key");
+    	    	var option = document.createElement("option");
+    	    	var contains = false;
+    	    	option.text = y.value;
+    	    	if (x.length == 0){
+    	    		x.add(option);
+    	    	} 
+    	    	for(var i=0; i<x.length;i++){
+    	    		if(x[i].text == y.value){
+    	    			contains = true;	
+    	    		}
+    	    	}
+    	    	if (contains == false){
+    	    		x.add(option);
+    	    	}
+    	    }
+    	    
+    </script>
+
+    	
+  </body>
+</html>
+

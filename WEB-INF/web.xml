@@ -81,6 +81,15 @@
         <servlet-name>SearchResults</servlet-name>
         <servlet-class>SearchResults</servlet-class>
     </servlet>      
+     <servlet>
+        <servlet-name>Submit</servlet-name>
+        <servlet-class>Submit</servlet-class>
+    </servlet> 
+    <servlet>
+        <servlet-name>LoginForm</servlet-name>
+        <servlet-class>LoginForm</servlet-class>
+    </servlet>  
+    
 
     
     
@@ -111,5 +120,19 @@
     <servlet-mapping>
         <servlet-name>SearchResults</servlet-name>
         <url-pattern>/SearchResults</url-pattern>
+    </servlet-mapping>     
+ <servlet-mapping>
+        <servlet-name>Submit</servlet-name>
+        <url-pattern>/Submit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginForm</servlet-name>
+        <url-pattern>/LoginForm</url-pattern>
     </servlet-mapping> 
+
+
+    
+
+    
+>>>>>>> ArticleSubmission
 </web-app>

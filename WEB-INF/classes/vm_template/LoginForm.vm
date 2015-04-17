@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/stucat002/css/css/bootstrap.min.css">
+</head>
+<body>
+   <h3>Submit Form</h3>
+   <h4>$status</h4>
+      
+   	<form method="post" action="LoginForm">
+	
+   	<p>User name: <input type="text" name="name"> Password: <input type="password" name="pwd"></p>
+	<p>Title <input type="text" name="title" value=$title>
+	<div><input type="submit" value="Submit"></div>
+	
+    </form>
+    
+    <script type="text/javascript">
+    	    function validateForm(articles, letter) {
+    	    	if(articles.selectedIndex == 0) {
+    	    		alert('Please make a selection from the articles list');
+    	    		return false;
+    	    	} 	
+    	    		
+    	    	if(letter.value == '') {
+    	    		alert('Please fill the letter message');
+    	    		return false;
+    	    	} 	
+    	    }
+    	   
+    	   
+            
+       
+    	</script>
+    	
+  </body>
+</html>
+
