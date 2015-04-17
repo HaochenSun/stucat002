@@ -65,7 +65,18 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>Logout</servlet-class>
     </servlet>  
-    
+    <servlet>
+        <servlet-name>Article</servlet-name>
+        <servlet-class>Article</servlet-class>
+    </servlet> 
+    <servlet>
+        <servlet-name>Search</servlet-name>
+        <servlet-class>Search</servlet-class>
+    </servlet>     
+    <servlet>
+        <servlet-name>SearchResults</servlet-name>
+        <servlet-class>SearchResults</servlet-class>
+    </servlet>      
     
     
     <servlet-mapping>
@@ -80,10 +91,17 @@
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
-    
-
-
-    
-
-    
+        <servlet-mapping>
+        <servlet-name>Article</servlet-name>
+        <url-pattern>/Article</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Search</servlet-name>
+        <url-pattern>/Search</url-pattern>
+    </servlet-mapping>    
+    <servlet-mapping>
+        <servlet-name>SearchResults</servlet-name>
+        <url-pattern>/SearchResults</url-pattern>
+    </servlet-mapping> 
+     
 </web-app>
