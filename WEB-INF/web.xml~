@@ -65,6 +65,7 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>Logout</servlet-class>
 <<<<<<< HEAD
+<<<<<<< HEAD
     </servlet>  
 
 =======
@@ -75,6 +76,10 @@
     </servlet>
     
 >>>>>>> Haochen1
+=======
+    </servlet>  
+    
+>>>>>>> badar_1
     
     
     <servlet-mapping>
@@ -84,6 +89,13 @@
     <servlet-mapping>
         <servlet-name>ReaderHome</servlet-name>
         <url-pattern>/index.html</url-pattern>
+<<<<<<< HEAD
+=======
+    </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
+>>>>>>> badar_1
     </servlet-mapping>
         <servlet-mapping>
         <servlet-name>Logout</servlet-name>
@@ -98,7 +110,10 @@
     </servlet-mapping>
  
     
+<<<<<<< HEAD
 >>>>>>> Haochen1
+=======
+>>>>>>> badar_1
 
 
     

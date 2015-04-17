@@ -73,8 +73,12 @@ public class ReaderHome extends VelocityViewServlet {
 			i=0;
 			while (results1.next()) 	{     
 				 
+<<<<<<< HEAD
 				 
 				 
+=======
+
+>>>>>>> badar_1
 				 i++;
 			}
 			
@@ -106,7 +110,10 @@ public class ReaderHome extends VelocityViewServlet {
 			String email = (String)session.getAttribute("email");
 			User user = new User(email);				
 			session.setAttribute("requiredreviewscount",user.reviewsRequiredforPublishing());
+<<<<<<< HEAD
 			session.setAttribute("articlecount", user.countReviews() - user.countArticles()*3);
+=======
+>>>>>>> badar_1
 		}
 	}
 }
