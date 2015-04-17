@@ -15,7 +15,7 @@
 	   </form>	   
    #else
    	   #if ($session.getAttribute("requiredreviewscount") > 0)
-   	       <h4 align="right">You must complete $session.getAttribute("requiredreviewscount") more review(s) before your articles can be published</h4>
+   	       <h4 align="right">You must complete $session.getAttribute("requiredreviewscount") more review(s) before your articles can be published ($session.getAttribute("articlecount") articles in queue)</h4>
    	   #end
    	   <h4>Logged in as $session.getAttribute("username")</h4>
    	   <form method="post" action="Logout">
@@ -27,7 +27,9 @@
   <ul>
     <li><a href="#notification">Notification</a></li>
     <li><a href="#editor">Contact editor</a></li>
-    <li><a href="#about">About</a></li>
+    <form method="post" action="ReaderAbout" id="readerabout">
+		 <li><a href="javascript:{}" onclick="document.getElementById('readerabout').submit(); return false;">About</a></li>
+    </form>
   </ul>
 </div>  
 

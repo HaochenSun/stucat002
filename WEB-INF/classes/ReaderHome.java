@@ -106,6 +106,7 @@ public class ReaderHome extends VelocityViewServlet {
 			String email = (String)session.getAttribute("email");
 			User user = new User(email);				
 			session.setAttribute("requiredreviewscount",user.reviewsRequiredforPublishing());
+			session.setAttribute("articlecount", -(user.countReviews()/3 - user.countArticles()));
 		}
 	}
 }

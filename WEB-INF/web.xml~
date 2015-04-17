@@ -53,17 +53,37 @@
 	  <url-pattern>*.vm</url-pattern>
 	</servlet-mapping>
 
-
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>Login</servlet-class>
+    </servlet>  
     <servlet>
         <servlet-name>ReaderHome</servlet-name>
         <servlet-class>ReaderHome</servlet-class>
     </servlet>  
-
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>Logout</servlet-class>
+    </servlet>  
+    
+    
     
     <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>    
+    <servlet-mapping>
         <servlet-name>ReaderHome</servlet-name>
-        <url-pattern>/ReaderHome</url-pattern>
+        <url-pattern>/index.html</url-pattern>
+    </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
     
+
+
+    
+
     
 </web-app>
