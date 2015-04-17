@@ -64,7 +64,11 @@
     <servlet>
         <servlet-name>Logout</servlet-name>
         <servlet-class>Logout</servlet-class>
-    </servlet>  
+    </servlet>
+    <servlet>
+        <servlet-name>ReaderAbout</servlet-name>
+        <servlet-class>ReaderAbout</servlet-class>
+    </servlet>
     
     
     
@@ -80,6 +84,11 @@
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReaderAbout</servlet-name>
+        <url-pattern>/ReaderAbout</url-pattern>
+    </servlet-mapping>
+ 
     
 
 
