@@ -65,6 +65,14 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>Logout</servlet-class>
     </servlet>  
+     <servlet>
+        <servlet-name>Submit</servlet-name>
+        <servlet-class>Submit</servlet-class>
+    </servlet> 
+    <servlet>
+        <servlet-name>LoginForm</servlet-name>
+        <servlet-class>LoginForm</servlet-class>
+    </servlet>  
     
     
     
@@ -81,6 +89,14 @@
         <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
     
+ <servlet-mapping>
+        <servlet-name>Submit</servlet-name>
+        <url-pattern>/Submit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginForm</servlet-name>
+        <url-pattern>/LoginForm</url-pattern>
+    </servlet-mapping> 
 
 
     

@@ -5,14 +5,18 @@
 </head>
 
 <body>
-<h1 style="text-align:center">Welcome to Self-Resousrcing Electronic Journal</h1>
-	
+<h1 style="text-align:center">Welcome to Self-Resourcing Electronic Journal</h1>
+   
+   
    #if (!$session.getAttribute("username"))
    	   <h4>$status</h4>
 	   <form method="post" action="Login">
 		<p>Email: <input type="text" name="email"> Password: <input type="password" name="pwd">&nbsp;<input type="submit"  class="btn btn-primary" value="Login"></p>
 	   </form>	   
    #else
+   	   #if ($session.getAttribute("requiredreviewscount") > 0)
+   	       <h4 align="right">You must complete $session.getAttribute("requiredreviewscount") more review(s) before your articles can be published</h4>
+   	   #end
    	   <h4>Logged in as $session.getAttribute("username")</h4>
    	   <form method="post" action="Logout">
 		<input type="submit"  class="btn btn-primary" value="Logout"></p>
