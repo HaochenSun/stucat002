@@ -25,7 +25,8 @@ public class Submit extends VelocityViewServlet {
 	public Template handleRequest (HttpServletRequest request, HttpServletResponse response, Context ctx) {
 		
 		Template form = null;
-		String email=request.getParameter("email");
+		HttpSession session = request.getSession(true);
+		String email=(String)session.getAttribute("email");;
 		String  title = request.getParameter("title");
 		String articalAbstract = request.getParameter("articalAbstract");
 		User user = new User(email);				
@@ -35,12 +36,14 @@ public class Submit extends VelocityViewServlet {
 		ctx.put("UserId", user_id);
 		String username = request.getParameter("username");
 		
-		String[] keywords=new String[10];
-		for (int i=1; i<keywords.length;i++){
-			keywords[i]=request.getParameter(("key"+i));
+		String[] keywords=request.getParameterValues("keyselect");
+		/*
+		for (int i=0; i<keywords.length;i++){
+			System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWW"+keywords[i]);
 			
 		}
-		/*keywords[0]=request.getParameter("key1");
+		/*
+		keywords[0]=request.getParameter("key1");
 		keywords[1]=request.getParameter("key2");
 		keywords[2]=request.getParameter("key3");
 		keywords[3]=request.getParameter("key4");
@@ -50,7 +53,7 @@ public class Submit extends VelocityViewServlet {
 		keywords[7]=request.getParameter("key8");
 		keywords[8]=request.getParameter("key9");
 		keywords[9]=request.getParameter("key10");*/
-		HttpSession session = request.getSession(true);
+		
 		java.sql.Connection conn = null;
 		java.sql.PreparedStatement ps=null;
 		java.sql.PreparedStatement ps1=null;
@@ -89,7 +92,7 @@ public class Submit extends VelocityViewServlet {
 					i++;
 				}
 				ctx.put("keywordsarray", keywordsarray);
-				System.out.println("KEYYYYYYYYYYYYYYYY"+keywordsarray[2]);
+				
 				ctx.put("keywordsarrayL", keywordsarrayL);
 				
 			}

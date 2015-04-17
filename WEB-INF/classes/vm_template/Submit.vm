@@ -43,6 +43,7 @@
 		   <option value=$keywordsarray.get($i)>
 		#end
 	  </datalist>
+	  
 	  <button type="button" id="btnAdd" onclick="addKeyword()">Add Keyword</button>
 	  
 	  <p>
@@ -86,6 +87,12 @@
     	    	if (contains == false){
     	    		x.add(option);
     	    	}
+    	    }
+    	    
+    	     function removeKeyword() {
+    	    	var x = document.getElementById("keyselect");
+    	    	x.remove(x.selectedIndex);
+    	    	
     	    }
     	    
     </script>
