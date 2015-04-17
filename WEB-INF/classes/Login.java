@@ -73,6 +73,10 @@ public class Login extends VelocityViewServlet {
 				session.setAttribute("username", checkname);
 				session.setAttribute("roleID", checkrole);
 				session.setAttribute("email", checkemail);
+				
+				
+				User user = new User(checkemail);				
+				session.setAttribute("requiredreviewscount",user.reviewsRequiredforPublishing());			
 			} 
 		else if (email == null && password == null)
 		//No login attempt

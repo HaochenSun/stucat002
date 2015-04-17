@@ -1,0 +1,26 @@
+import java.io.*;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import com.mysql.jdbc.*;
+
+public class User{
+	
+	public UserMethods(String useremail){
+		email = useremail;
+	}
+	// methods
+	public String toString() {
+		return("Class = " + this.getClass().getName() + ", Name = " + name + ", Dob = " + dob);
+	}
+	
+	public String getname() { return name; }
+		
+	public String getdob() { return dob; }
+
+	// instance fields
+	private String email;
+	private String dob;
+}
