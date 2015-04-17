@@ -13,9 +13,8 @@ import java.sql.SQLException;
 import com.mysql.jdbc.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import javax.servlet.http.HttpSession;
 
-public class ReaderHome extends VelocityViewServlet {
+public class ReaderAbout extends VelocityViewServlet {
 
 	public Template handleRequest(HttpServletRequest request,
 			HttpServletResponse response, Context ctx) {
@@ -35,7 +34,7 @@ public class ReaderHome extends VelocityViewServlet {
 			conn = DriverManager.getConnection(url, sqluserName, sqlpassword);
 
 			//get all volumes from database
-			ps = conn.prepareStatement("SELECT VolumeId, Name FROM Volume;");
+			ps = conn.prepareStatement("SELECT AimId, Description FROM Aim;");
 			
 			ResultSet results = ps.executeQuery();
 
@@ -45,22 +44,21 @@ public class ReaderHome extends VelocityViewServlet {
 			  results.beforeFirst(); 
 			}
 			
-			String volumeData[][] = new String[rowcount][2];
+			String aimData[][] = new String[rowcount][2];
 			
 			int i=0;
 			while (results.next()) 	{     
 				 
-				 volumeData[i][0] = results.getString("VolumeId");
-				 volumeData[i][1] = results.getString("Name");
-				 
+				 aimData[i][0] = results.getString("AimId");
+				 aimData[i][1] = results.getString("Description"); 
 				 i++;
 			}
 			
-			ctx.put("volumeData", volumeData);
+			ctx.put("aimData", aimData);
 
 			//get all editions from database
 			ps1 = conn
-					.prepareStatement("SELECT EditionId, VolumeId, Description FROM Edition order by VolumeId;");
+					.prepareStatement("SELECT GoalId, Description FROM Goal;");
 			ResultSet results1 = ps1.executeQuery();
 
 			if (results1.last()) {
@@ -68,21 +66,17 @@ public class ReaderHome extends VelocityViewServlet {
 			  results1.beforeFirst(); 
 			}
 			
-			String editionData[][] = new String[rowcount][2];
+			String goalData[][] = new String[rowcount][2];
 			
 			i=0;
 			while (results1.next()) 	{     
 				 
-<<<<<<< HEAD
-				 
-				 
-=======
-
->>>>>>> badar_1
-				 i++;
+				goalData[i][0] = results.getString("GoalId");
+				goalData[i][1] = results.getString("Description");				 
+				i++;
 			}
 			
-			ctx.put("editionData", editionData);
+			ctx.put("goalData", goalData);
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -95,27 +89,11 @@ public class ReaderHome extends VelocityViewServlet {
 
 		try {
 			ctx.put("status","");
-			checkReviewsCount(request);
-			form = getTemplate("\\vm_template\\ReaderHome.vm");
+			form = getTemplate("\\vm_template\\ReaderAbout.vm");
 		} catch (Exception e) {
-			System.out.println("ReaderHome excpetion: " + e);
+			System.out.println("ReaderAbout excpetion: " + e);
 		}
 		return form;
 	}
 
-	private void checkReviewsCount(HttpServletRequest request){
-		//If user is logged in then update their required review count
-		HttpSession session = request.getSession(false);
-		if (session.getAttribute("email")!= null){
-			String email = (String)session.getAttribute("email");
-			User user = new User(email);				
-			session.setAttribute("requiredreviewscount",user.reviewsRequiredforPublishing());
-<<<<<<< HEAD
-			session.setAttribute("articlecount", user.countReviews() - user.countArticles()*3);
-=======
->>>>>>> badar_1
-		}
-	}
 }
-
-

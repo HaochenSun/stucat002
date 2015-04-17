@@ -2,6 +2,11 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="/stucat002/css/css/bootstrap.min.css">
+	<style type="text/css">
+	  a:hover {
+	    cursor:pointer;
+	 }
+	 </style>
 </head>
 
 <body>
@@ -27,63 +32,129 @@
   <ul>
     <li><a href="#notification">Notification</a></li>
     <li><a href="#editor">Contact editor</a></li>
-    <form method="post" action="ReaderAbout" id="readerabout">
-		 <li><a href="javascript:{}" onclick="document.getElementById('readerabout').submit(); return false;">About</a></li>
-    </form>
+    <li><a href="ReaderAbout">About</a></li>
+
   </ul>
+  <li><a href="Submit">Submit Article</a></li>
 </div>  
 
-<form action="">
-  <input type="search" name="search">
-  <input type="submit">
-</form>
+<h3>
+   <a href="Search">Search</a>
+</h3>
+
 
 <ul>
-  <li><a id="2015" href="#">2015</a></li>
-  
-  <div class="nav" id="edition" style="display: none;">
-    <ul>
-      <li><a href="#">1</a></li>
-      <li><a href="#">2</a></li>
-      <li><a href="#">3</a></li>
-      <li><a href="#">4</a></li>  
-    </ul>
-  </div>  
-  <li><a id="2014" href="#">2014</a></li>
-  <li><a id="2013" href="#">2013</a></li>
-  <li><a id="2012" href="#">2012</a></li>
-  
-  #foreach ($row in $volumeData)
-		#set ($c = 0)
-		#foreach ($col in $row) 
-			#if ($c == 0)
-				#set ($volumeId = $col)
-			#else
-				#set ($volumeName = $col)
-			#end
-			#set ($c = 1)
-		#end
-		<li><a id=$!volumeId href="#">$!volumeName</a></li>
-  #end
- 
+  <div class="nav" id="volumesDiv">
+	  <li class="nav" id="volumesList">
+	  </li> 
+  </div> 
 </ul>
 
-    <script type="text/javascript">
-        window.onload = function() {
-          var a = document.getElementById("2015");
+
+<script type="text/javascript">
+	 
+    var volumeArr = ${volumeArr};
     
-          a.onclick = function() {
-        	if(document.getElementById("edition").style.display=="none")  
-        	  document.getElementById("edition").style.display="initial";
-        	else
-              document.getElementById("edition").style.display="none";	
-            return false;
-          }
-        }       
-        
-        
-       
-    </script>
+     (function(){
+	volumeArr.forEach(function(vol){
+	    
+		var el = document.getElementById('volumesList');
+		
+		var v = document.createElement('a');
+		var linkText = document.createTextNode(vol.Name);
+		v.appendChild(linkText);
+		v.setAttribute('onclick','showEditions('+vol.VolumeId+')');
+		v.setAttribute('id', 'v' + vol.VolumeId);
+		el.appendChild(v);
+		var br = document.createElement('br');
+		el.appendChild(br);
+		
+		var editionData = ${editionData};
+ 
+		editionData[vol.VolumeId].forEach(function(v){
+		
+			var e = document.createElement('a');
+			var linkText = document.createTextNode(v.Description);
+			e.appendChild( document.createTextNode( '\u00A0 \u00A0 \u00A0' ) );
+			e.appendChild(linkText);
+			e.setAttribute('onclick','showArticles('+v.EditionId+')');
+			e.setAttribute('id', 'e' + v.EditionId);
+			e.setAttribute('style','display: none;');
+			el.appendChild(e);
+			var br = document.createElement('br');
+			e.appendChild(br);
+			
+			var articleData = ${articleData};
+ 
+			
+			articleData[v.EditionId].forEach(function(v){
+				var a = document.createElement('a');
+				var linkText = document.createTextNode(v.Title);
+				a.appendChild( document.createTextNode( '\u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0' ) );
+				a.appendChild(linkText);
+				a.setAttribute('id', 'a' + v.ArticleId);
+				a.setAttribute('href', 'Article?aId='+v.ArticleId);
+				a.setAttribute('style','display: none;');
+				el.appendChild(a);
+				var br = document.createElement('br');
+				a.appendChild(br);
+				
+
+                    })
+		})
+		
+		
+	});
+    })();
+    
+    function showEditions(volId) {
+    	
+    	var editionData = ${editionData};
+    	
+    	var el = document.getElementById('v'+volId);
+
+	editionData[volId].forEach(function(v){
+	    	var elE = document.getElementById('e'+v.EditionId);
+	    	
+	    	if(elE.getAttribute('style') == 'display: initial;' ) {
+	    	  elE.setAttribute('style','display: none;');
+	    	   
+		var articleData = ${articleData};
+		
+		articleData[v.EditionId].forEach(function(v){
+			var elA = document.getElementById('a'+v.ArticleId);
+			elA.setAttribute('style','display: none;');
+		})	    	  
+	    	  
+	    	  
+	    	}
+	    	else {
+	    	  elE.setAttribute('style','display: initial;');
+	    	}
+		
+	})
+    }
+    
+    function showArticles(EdId) {
+    	
+    	var articleData = ${articleData};
+    	
+    	var el = document.getElementById('e'+EdId);
+    	
+ 	articleData[EdId].forEach(function(v){
+	    	var el = document.getElementById('a'+v.ArticleId);
+	    	
+	    	if(el.getAttribute('style') == 'display: initial;' ) {
+	    	  el.setAttribute('style','display: none;');
+	    	}
+	    	else {
+	    	  el.setAttribute('style','display: initial;');
+	    	}
+		
+	})
+    }
+    	    
+</script>
 
 </body>
 

@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/stucat002/css/css/bootstrap.min.css">
+
+</head>
+
+<body>
+<h1 style="text-align:center">Welcome to Self-Resourcing Electronic Journal</h1>
+	
+   #if (!$session.getAttribute("username"))
+   	   <h4>$status</h4>
+	   <form method="post" action="Login">
+		<p>User name: <input type="text" name="name"> Password: <input type="password" name="pwd">&nbsp;<input type="submit"  class="btn btn-primary" value="Login"></p>
+	   </form>	   
+   #else
+   	   <h4>Logged in as $session.getAttribute("username")</h4>
+   	   <form method="post" action="Logout">
+		<input type="submit"  class="btn btn-primary" value="Logout"></p>
+	   </form>	
+   #end
+
+<div class="nav">
+  <ul>
+    <li><a href="#notification">Notification</a></li>
+    <li><a href="#editor">Contact editor</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+</div>  
+
+<h4>
+   <a href="index.html">Home Page</a> <span> > Articles search Page</span>
+</h4>
+
+<form method="post" action="SearchResults">
+	
+	<p>Title <input type="text" name="Title" value="$!Title">
+	
+	<p>Author <input type="text" name="Author" value="$!Author">
+	
+	<p>Date From <input type="date" name="DateFrom" value="$!DateFrom">
+	<p>To <input type="date" name="DateTo" value="$!DateTo">
+	
+	<p>Keywords <input type="text" name="Keyword1" value="$!Keyword1">
+			<input type="text" name="Keyword2" value="$!Keyword2">
+			<input type="text" name="Keyword3" value="$!Keyword3">
+
+	
+	<div><input type="submit" value="Search"></div>
+	
+ </form>
+
+
+<script type="text/javascript">
+	    
+</script>
+
+</body>
+
+</html>

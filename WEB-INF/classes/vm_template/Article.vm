@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/stucat002/css/css/bootstrap.min.css">
+	<style type="text/css">
+	  a:hover {
+	    cursor:pointer;
+	 }
+	</style>
+</head>
+
+<body>
+<h1 style="text-align:center">Welcome to Self-Resourcing Electronic Journal</h1>
+	
+   #if (!$session.getAttribute("username"))
+   	   <h4>$status</h4>
+	   <form method="post" action="Login">
+		<p>User name: <input type="text" name="name"> Password: <input type="password" name="pwd">&nbsp;<input type="submit"  class="btn btn-primary" value="Login"></p>
+	   </form>	   
+   #else
+   	   <h4>Logged in as $session.getAttribute("username")</h4>
+   	   <form method="post" action="Logout">
+		<input type="submit"  class="btn btn-primary" value="Logout"></p>
+	   </form>	
+   #end
+
+<div class="nav">
+  <ul>
+    <li><a href="#notification">Notification</a></li>
+    <li><a href="#editor">Contact editor</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+</div>  
+
+<h4>
+   <a href="index.html">Home Page</a> <span> > Article Info Page</span>
+</h4>
+
+<p>Title: <span>$!Title</span>
+<p>Author: <span>$!Name</span>
+<p>Email: <span>$!Email</span>
+
+<p>Abstract
+<p><span width="80%">$!Abstract</span>
+
+
+<p>
+<div id="keywordsDiv">
+Keywords: 
+</div>
+
+<p>
+<p>
+<a>Download article as PDF</a>
+
+<script type="text/javascript">
+	 
+    var keywordArr = ${keywordArr};
+    
+     (function(){
+	keywordArr.forEach(function(vol){
+	    
+		var el = document.getElementById('keywordsDiv');
+		
+		var v = document.createElement('span');
+		var linkText = document.createTextNode(vol.Keyword);
+		v.appendChild(linkText);
+		v.appendChild( document.createTextNode( '\u00A0 \u00A0' ) );
+		el.appendChild(v);
+
+	});
+    })();
+    
+    	    
+</script>
+
+</body>
+
+</html>

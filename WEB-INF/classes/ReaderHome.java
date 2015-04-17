@@ -24,6 +24,7 @@ public class ReaderHome extends VelocityViewServlet {
 		java.sql.Connection conn = null;
 		java.sql.PreparedStatement ps = null;
 		java.sql.PreparedStatement ps1=null;
+		java.sql.PreparedStatement ps2=null;
 
 		String sqluserName = "team152";
 		String sqlpassword = "b042ba74";
@@ -33,52 +34,104 @@ public class ReaderHome extends VelocityViewServlet {
 			// connect to the database
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			conn = DriverManager.getConnection(url, sqluserName, sqlpassword);
-
-			//get all volumes from database
+			
+			// prepare statement
 			ps = conn.prepareStatement("SELECT VolumeId, Name FROM Volume;");
-			
 			ResultSet results = ps.executeQuery();
-
-			int rowcount = 0;
-			if (results.last()) {
-			  rowcount = results.getRow();
-			  results.beforeFirst(); 
-			}
 			
-			String volumeData[][] = new String[rowcount][2];
+			JSONObject volumeObj;
+			JSONArray volumeArr = new JSONArray();
 			
-			int i=0;
 			while (results.next()) 	{     
 				 
-				 volumeData[i][0] = results.getString("VolumeId");
-				 volumeData[i][1] = results.getString("Name");
-				 
-				 i++;
+				volumeObj = new JSONObject();
+				volumeObj.put("VolumeId", results.getString("VolumeId"));
+				volumeObj.put("Name", results.getString("Name"));
+				
+				volumeArr.put(volumeObj);	
 			}
 			
-			ctx.put("volumeData", volumeData);
-
-			//get all editions from database
-			ps1 = conn
-					.prepareStatement("SELECT EditionId, VolumeId, Description FROM Edition order by VolumeId;");
+			ctx.put("volumeArr", volumeArr);
+			
+			// prepare statement
+			ps1 = conn.prepareStatement("SELECT EditionId, VolumeId, Description FROM Edition order by VolumeId;");
 			ResultSet results1 = ps1.executeQuery();
+							
+			JSONObject editionObj;
+			JSONArray editionArr = new JSONArray();
+			JSONObject editionData = new JSONObject();
+			
+			String CurrentVId = "";
+			String PrevVId = "";
 
-			if (results1.last()) {
-			  rowcount = results.getRow();
-			  results1.beforeFirst(); 
+			while (results1.next()) {     
+				 
+				editionObj = new JSONObject();
+				editionObj.put("EditionId", results1.getString("EditionId"));
+				editionObj.put("Description", results1.getString("Description"));
+				
+				CurrentVId = results1.getString("VolumeId");
+				
+				if (PrevVId.equals("")) {
+					editionArr.put(editionObj);
+				}
+				else if (CurrentVId.equals(PrevVId)) {
+					editionArr.put(editionObj);
+				}
+				else if (!(CurrentVId.equals(PrevVId)) ) {
+					
+					editionData.put(PrevVId, editionArr);
+					
+					editionArr = new JSONArray();
+					editionArr.put(editionObj);	
+				}
+
+				PrevVId = CurrentVId;
 			}
 			
-			String editionData[][] = new String[rowcount][2];
-			
-			i=0;
-			while (results1.next()) 	{     
-				 
-				 
-				 
-				 i++;
-			}
+			editionData.put(CurrentVId, editionArr);
 			
 			ctx.put("editionData", editionData);
+			
+			// prepare statement for Article
+			ps2 = conn.prepareStatement("SELECT ArticleId, Title, EditionId FROM Article order by EditionId;");
+			ResultSet results2 = ps2.executeQuery();
+			
+			JSONObject articleObj;
+			JSONArray articleArr = new JSONArray();
+			JSONObject articleData = new JSONObject();
+			
+			String CurrentEId = "";
+			String PrevEId = "";
+			
+			while (results2.next()) 	{   
+				
+				articleObj = new JSONObject();
+				articleObj.put("ArticleId", results2.getString("ArticleId"));
+				articleObj.put("Title", results2.getString("Title"));
+
+				CurrentEId = results2.getString("EditionId");
+				
+				if (PrevEId.equals("")) {
+					articleArr.put(articleObj);
+				}
+				else if (CurrentEId.equals(PrevEId)) {
+					articleArr.put(articleObj);
+				}
+				else if (!(CurrentEId.equals(PrevEId)) ) {
+					articleData.put(PrevEId, articleArr);
+					
+					articleArr = new JSONArray();
+					articleArr.put(articleObj);
+				}
+				
+				PrevEId = CurrentEId;
+			}
+			
+			articleData.put(CurrentEId, articleArr);
+			
+			ctx.put("articleData", articleData);
+
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {

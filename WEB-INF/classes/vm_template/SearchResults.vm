@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/stucat002/css/css/bootstrap.min.css">
+	<style type="text/css">
+	  a:hover {
+	    cursor:pointer;
+	 }
+	</style>
+</head>
+
+<body>
+<h1 style="text-align:center">Welcome to Self-Resourcing Electronic Journal</h1>
+	
+   #if (!$session.getAttribute("username"))
+   	   <h4>$status</h4>
+	   <form method="post" action="Login">
+		<p>User name: <input type="text" name="name"> Password: <input type="password" name="pwd">&nbsp;<input type="submit"  class="btn btn-primary" value="Login"></p>
+	   </form>	   
+   #else
+   	   <h4>Logged in as $session.getAttribute("username")</h4>
+   	   <form method="post" action="Logout">
+		<input type="submit"  class="btn btn-primary" value="Logout"></p>
+	   </form>	
+   #end
+
+<div class="nav">
+  <ul>
+    <li><a href="#notification">Notification</a></li>
+    <li><a href="#editor">Contact editor</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+</div>  
+
+<h4>
+   <a href="index.html">Home Page</a> <span> > </span> <a href="Search">Articles search Page</a> <span> > Search Results Page</span>
+</h4>
+
+<table id="searchResultsTable" border="1" style="width:80%">
+  <tr>
+    <th>Title</th>
+    <th>Author</th> 
+    <th>Date</th>
+  </tr>
+</table>
+
+
+<script type="text/javascript">
+     var articleArr = ${articleArr};
+    
+     (function(){
+	articleArr.forEach(function(article){
+	    
+		var el = document.getElementById('searchResultsTable');
+		
+		var r = document.createElement('tr');
+		var t = document.createElement('td'); //title
+		var n = document.createElement('td'); //name
+		var e = document.createElement('td'); //email
+		
+		var a = document.createElement('a');
+		var linkText = document.createTextNode(article.Title);
+		a.appendChild(linkText);
+		a.setAttribute('id', 'a' + article.ArticleId);
+		a.setAttribute('href', 'Article?aId='+article.ArticleId);
+		
+		var nameSpan = document.createElement('span');
+		var nameSpanText = document.createTextNode(article.Name);
+		nameSpan.appendChild(nameSpanText);
+		
+		var emailSpan = document.createElement('span');
+		var emailSpanText = document.createTextNode(article.Email);
+		emailSpan.appendChild(emailSpanText);
+		
+		t.appendChild(a);
+		n.appendChild(nameSpan);
+		e.appendChild(emailSpan);
+		
+		el.appendChild(r);
+		el.appendChild(t);
+		el.appendChild(n);
+		el.appendChild(e);
+
+	});
+    })();  
+</script>
+
+</body>
+
+</html>
