@@ -1,0 +1,1 @@
+set classpath=.;H:\mywintomcat\webapps\stucat002\WEB-INF\lib\*
