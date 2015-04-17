@@ -72,11 +72,7 @@ public class Login extends VelocityViewServlet {
 				//Store important user values in session
 				session.setAttribute("username", checkname);
 				session.setAttribute("roleID", checkrole);
-				session.setAttribute("email", checkemail);
-				
-				
-				User user = new User(checkemail);				
-				session.setAttribute("requiredreviewscount",user.reviewsRequiredforPublishing());			
+				session.setAttribute("email", checkemail);		
 			} 
 		else if (email == null && password == null)
 		//No login attempt
@@ -90,8 +86,8 @@ public class Login extends VelocityViewServlet {
 			}	
 		try 
 		{
-			//Render homepage
-			page = getTemplate("\\vm_template\\ReaderHome.vm");
+			//Render homepage from servlet
+			request.getRequestDispatcher("/").forward(request,response);
 		} 
 		catch (Exception e) 
 		{

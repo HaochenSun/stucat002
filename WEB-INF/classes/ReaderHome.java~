@@ -91,6 +91,7 @@ public class ReaderHome extends VelocityViewServlet {
 		}
 
 		try {
+			ctx.put("status","");
 			form = getTemplate("\\vm_template\\ReaderHome.vm");
 		} catch (Exception e) {
 			System.out.println("ReaderHome excpetion: " + e);

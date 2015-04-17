@@ -25,7 +25,6 @@ public class User{
 				
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				conn=DriverManager.getConnection(url,sqluserName,sqlpassword);
-				System.out.println("REMEMBER TO CLOSE YOUR DB CONNECTION");
 			}
 		catch(Exception e)
 			{

@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import com.mysql.jdbc.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import javax.servlet.http.HttpSession;
 
 public class ReaderHome extends VelocityViewServlet {
 
@@ -72,9 +73,7 @@ public class ReaderHome extends VelocityViewServlet {
 			i=0;
 			while (results1.next()) 	{     
 				 
-				 editionData[i][0] = results.getString("EditionId");
-				 editionData[i][1] = results.getString("Description");
-				 //editionData[i][2] = results.getString("VolumeId");
+				 
 				 
 				 i++;
 			}
@@ -92,6 +91,7 @@ public class ReaderHome extends VelocityViewServlet {
 
 		try {
 			ctx.put("status","");
+			checkReviewsCount(request);
 			form = getTemplate("\\vm_template\\ReaderHome.vm");
 		} catch (Exception e) {
 			System.out.println("ReaderHome excpetion: " + e);
@@ -99,4 +99,15 @@ public class ReaderHome extends VelocityViewServlet {
 		return form;
 	}
 
+	private void checkReviewsCount(HttpServletRequest request){
+		//If user is logged in then update their required review count
+		HttpSession session = request.getSession(false);
+		if (session.getAttribute("email")!= null){
+			String email = (String)session.getAttribute("email");
+			User user = new User(email);				
+			session.setAttribute("requiredreviewscount",user.reviewsRequiredforPublishing());
+		}
+	}
 }
+
+
