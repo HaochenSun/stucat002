@@ -27,9 +27,8 @@
   <ul>
     <li><a href="#notification">Notification</a></li>
     <li><a href="#editor">Contact editor</a></li>
-    <form method="post" action="ReaderAbout" id="readerabout">
-		 <li><a href="javascript:{}" onclick="document.getElementById('readerabout').submit(); return false;">About</a></li>
-    </form>
+    <li><a href="ReaderAbout">About</a></li>
+
   </ul>
 </div>  
 

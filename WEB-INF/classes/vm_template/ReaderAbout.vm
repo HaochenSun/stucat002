@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/Ejournal/css/css/bootstrap.min.css">
+</head>
+
+<body>
+<h1 style="text-align:center">Welcome to Self-Resourcing Electronic Journal</h1>
+	
+   #if (!$session.getAttribute("username"))
+   	   <h4>$status</h4>
+	   <form method="post" action="Login">
+		<p>User name: <input type="text" name="name"> Password: <input type="password" name="pwd">&nbsp;<input type="submit"  class="btn btn-primary" value="Login"></p>
+	   </form>	   
+   #else
+   	   <h4>Logged in as $session.getAttribute("username")</h4>
+   	   <form method="post" action="Logout">
+		<input type="submit"  class="btn btn-primary" value="Logout"></p>
+	   </form>	
+   #end
+
+<div class="nav">
+  <ul>
+    <li><a href="#notification">Notification</a></li>
+    <li><a href="#editor">Contact editor</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+</div>  
+
+<form action="">
+  <input type="search" name="search">
+  <input type="submit">
+</form>
+<p>Aims:</p>
+#foreach ($row in $aimData)
+		#set ($c = 0)
+		#foreach ($col in $row) 
+			#if ($c == 0)
+				#set ($AimId = $col)
+			#else
+				#set ($Description = $col)
+			#end
+			#set ($c = 1)
+		#end
+		<p>$!Description</p>
+#end
+<p>Goals:</p>
+#foreach ($row in $goalData)
+		#set ($c = 0)
+		#foreach ($col in $row) 
+			#if ($c == 0)
+				#set ($GoalId = $col)
+			#else
+				#set ($Description = $col)
+			#end
+			#set ($c = 1)
+		#end
+		<p>$!Description</p>
+#end
+	
+</body>
+	
+</html>
