@@ -89,7 +89,10 @@
         <servlet-name>LoginForm</servlet-name>
         <servlet-class>LoginForm</servlet-class>
     </servlet>  
-    
+    <servlet>
+        <servlet-name>ReaderHelp</servlet-name>
+        <servlet-class>ReaderHelp</servlet-class>
+    </servlet>
 
     
     
@@ -121,14 +124,18 @@
         <servlet-name>SearchResults</servlet-name>
         <url-pattern>/SearchResults</url-pattern>
     </servlet-mapping>     
- <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>Submit</servlet-name>
         <url-pattern>/Submit</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginForm</servlet-name>
         <url-pattern>/LoginForm</url-pattern>
-    </servlet-mapping> 
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReaderHelp</servlet-name>
+        <url-pattern>/ReaderHelp</url-pattern>
+    </servlet-mapping>
 
 
     
