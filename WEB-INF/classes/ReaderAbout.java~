@@ -34,7 +34,7 @@ public class ReaderAbout extends VelocityViewServlet {
 			conn = DriverManager.getConnection(url, sqluserName, sqlpassword);
 
 			//get all volumes from database
-			ps = conn.prepareStatement("SELECT AimId, AimDescription FROM Aim;");
+			ps = conn.prepareStatement("SELECT AimId, Description FROM Aim;");
 			
 			ResultSet results = ps.executeQuery();
 
@@ -50,29 +50,29 @@ public class ReaderAbout extends VelocityViewServlet {
 			while (results.next()) 	{     
 				 
 				 aimData[i][0] = results.getString("AimId");
-				 aimData[i][1] = results.getString("AimDescription"); 
+				 aimData[i][1] = results.getString("Description"); 
 				 i++;
 			}
 			
 			ctx.put("aimData", aimData);
 
 			//get all editions from database
-			ps1 = conn.prepareStatement("SELECT GoalId, GoalDescription FROM Goal;");
+			ps1 = conn
+					.prepareStatement("SELECT GoalId, Description FROM Goal;");
 			ResultSet results1 = ps1.executeQuery();
 
-			int rowcount1 = 0;
 			if (results1.last()) {
-			  rowcount1 = results1.getRow();
+			  rowcount = results.getRow();
 			  results1.beforeFirst(); 
 			}
 			
-			String goalData[][] = new String[rowcount1][2];
+			String goalData[][] = new String[rowcount][2];
 			
 			i=0;
 			while (results1.next()) 	{     
 				 
-				goalData[i][0] = results1.getString("GoalId");
-				goalData[i][1] = results1.getString("GoalDescription");				 
+				goalData[i][0] = results.getString("GoalId");
+				goalData[i][1] = results.getString("Description");				 
 				i++;
 			}
 			

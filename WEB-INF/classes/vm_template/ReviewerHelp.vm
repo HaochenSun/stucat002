@@ -36,16 +36,8 @@ cursor:pointer;
 <li><a href="ReaderHelp">Help</a></li>
 
 <p>
-	Some detailed submission guideines
-	<li><a href="#template path">Word Template</a></li>	
+    Instructions regarding how to peer-review pending articles, describing what qualities are sought and how to complete the review form.
 </p>	
-
-<p>
-	Some detailed submission guideines
-	<li><a href="#template path">LaTeX Template</a></li>	
-</p>
-
-
 </body>
 	
 </html>

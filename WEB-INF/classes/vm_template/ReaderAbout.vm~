@@ -35,17 +35,43 @@ cursor:pointer;
 <li><a href="ReaderAbout">About</a></li>
 <li><a href="ReaderHelp">Help</a></li>
 
-<p>
-	Some detailed submission guideines
-	<li><a href="#template path">Word Template</a></li>	
-</p>	
+</ul>
+<li><a href="Submit">Submit Article</a></li>
+</div>
 
-<p>
-	Some detailed submission guideines
-	<li><a href="#template path">LaTeX Template</a></li>	
-</p>
+<h3>
+<a href="Search">Search</a>
+</h3>
 
+<p>Aims:</p>
+#foreach ($row in $aimData)
+		#set ($c = 0)
+		#foreach ($col in $row)
+			#if ($c == 0)
+				#set ($AimId = $col)
+			#else
+				#set ($Description = $col)
+			#end
+			#set ($c = 1)
+		#end
+		<p>$!Description</p>
+#end
+<p>Goals:</p>
+#foreach ($row in $goalData)
+		#set ($c = 0)
+		#foreach ($col in $row) 
+			#if ($c == 0)
+				#set ($GoalId = $col)
+			#else
+				#set ($Description = $col)
+			#end
+			#set ($c = 1)
+		#end
+		<p>$!Description</p>
+#end
+<li><a href="ReaderHelp">More about submission</a></li>
 
+	
 </body>
 	
 </html>

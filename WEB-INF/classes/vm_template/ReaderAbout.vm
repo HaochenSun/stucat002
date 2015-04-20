@@ -35,14 +35,6 @@ cursor:pointer;
 <li><a href="ReaderAbout">About</a></li>
 <li><a href="ReaderHelp">Help</a></li>
 
-</ul>
-<li><a href="Submit">Submit Article</a></li>
-</div>
-
-<h3>
-<a href="Search">Search</a>
-</h3>
-
 <p>Aims:</p>
 #foreach ($row in $aimData)
 		#set ($c = 0)
@@ -50,11 +42,11 @@ cursor:pointer;
 			#if ($c == 0)
 				#set ($AimId = $col)
 			#else
-				#set ($Description = $col)
+				#set ($AimDescription = $col)
 			#end
 			#set ($c = 1)
 		#end
-		<p>$!Description</p>
+		<p>$!AimDescription</p>
 #end
 <p>Goals:</p>
 #foreach ($row in $goalData)
@@ -63,11 +55,11 @@ cursor:pointer;
 			#if ($c == 0)
 				#set ($GoalId = $col)
 			#else
-				#set ($Description = $col)
+				#set ($GoalDescription = $col)
 			#end
 			#set ($c = 1)
 		#end
-		<p>$!Description</p>
+		<p>$!GoalDescription</p>
 #end
 <li><a href="ReaderHelp">More about submission</a></li>
 

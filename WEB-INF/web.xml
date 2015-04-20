@@ -93,7 +93,10 @@
         <servlet-name>ReaderHelp</servlet-name>
         <servlet-class>ReaderHelp</servlet-class>
     </servlet>
-
+    <servlet>
+        <servlet-name>ReviewerHelp</servlet-name>
+        <servlet-class>ReviewerHelp</servlet-class>
+    </servlet>
     
     
     <servlet-mapping>
@@ -136,7 +139,10 @@
         <servlet-name>ReaderHelp</servlet-name>
         <url-pattern>/ReaderHelp</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>ReviewerHelp</servlet-name>
+        <url-pattern>/ReviewerHelp</url-pattern>
+    </servlet-mapping>
 
     
 

@@ -35,6 +35,10 @@ cursor:pointer;
 <li><a href="ReaderAbout">About</a></li>
 <li><a href="ReaderHelp">Help</a></li>
 
+</ul>
+<li><a href="Submit">Submit Article</a></li>
+</div>
+
 <p>
 	Some detailed submission guideines
 	<li><a href="#template path">Word Template</a></li>	
